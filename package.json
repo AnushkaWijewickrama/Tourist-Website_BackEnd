@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/storage": "^7.9.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.19.0",
+    "connect": "^3.7.0",
+    "connection-state": "^0.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.6.0",
+    "express": "^4.19.2",
+    "firebase-admin": "^12.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mailgen": "^2.0.28",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.2.3",
+    "multer": "^1.4.4",
+    "nodemailer": "^6.9.13",
+    "serve-static": "^2.0.0-beta.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
