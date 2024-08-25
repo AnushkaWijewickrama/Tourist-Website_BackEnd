@@ -1,8 +1,8 @@
-const package = require('../models/package');
+const Package = require('../models/package');
 
 exports.getpackages = async (req, res) => {
   try {
-    const packages = await package.find().select('price imagePath title description latest');
+    const packages = await Package.find().select('price imagePath title description latest discount');
     res.status(200).json(packages);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
@@ -11,22 +11,23 @@ exports.getpackages = async (req, res) => {
 
 exports.getpackage = async (req, res) => {
   const { id } = req.params
-  const package = await package.findOne({ _id: id });
+  const package = await Package.findOne({ _id: id });
   res.status(200).json(package);
 };
 
 exports.postpackage = async (req, res) => {
-  const { title, description, latest, price } = req.body;
+  const { title, description, latest, price, discount } = req.body;
   const imagePath = process.env.PROTOCOL + '://' + req.get('host') + '/packages/' + req.file.filename; // Note: set path dynamically
-  const package = new package({
+  const package = new Package({
     title,
     description,
     imagePath,
     latest,
-    price
+    price,
+    discount
   });
 
-  const createdpackage = await package.save();
+  const createdPackage = await package.save();
   res.status(201).json({
     package: {
       ...createdPackage._doc,
@@ -35,15 +36,15 @@ exports.postpackage = async (req, res) => {
 };
 exports.deletepackageById = async (req, res) => {
   const { id } = req.params;
-  await package.deleteMany({ _id: id });
-  res.status(201).json(await package.find());;
+  await Package.deleteMany({ _id: id });
+  res.status(201).json(await Package.find());;
 
 };
 exports.postpackageSingle = async (req, res) => {
   const { title, description, brand } = req.body;
 
-  const imagePath = process.env.PROTOCOL + '://' + req.get('host') + '/package-details/' + req.file.filename; // Note: set path dynamically
-  const package = new package({
+  const imagePath = process.env.PROTOCOL + '://' + req.get('host') + '/packages/' + req.file.filename; // Note: set path dynamically
+  const package = new Package({
     title,
     description,
     imagePath,
@@ -59,7 +60,7 @@ exports.postpackageSingle = async (req, res) => {
 exports.updatepackage = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, price, latest } = req.body;
+    const { title, description, price, latest, discount } = req.body;
 
     let imagePath;
     if (req?.file?.filename) {
@@ -71,7 +72,8 @@ exports.updatepackage = async (req, res) => {
     if (imagePath) updates['imagePath'] = imagePath;
     if (price) updates['price'] = price;
     if (latest) updates['latest'] = latest;
-    const updatedpackage = await package.findByIdAndUpdate(id, updates, { new: true });
+    if (discount) updates['discount'] = discount;
+    const updatedpackage = await Package.findByIdAndUpdate(id, updates, { new: true });
     if (!updatedpackage) {
       return res.status(404).json({ error: "package not found" });
     }
@@ -83,6 +85,6 @@ exports.updatepackage = async (req, res) => {
 };
 
 exports.getpackageById = async (req, res) => {
-  const package = await package.findOne({ _id: req?.params?.id });
+  const package = await Package.findOne({ _id: req?.params?.id });
   res.status(200).json(package);
 };

@@ -28,10 +28,10 @@ app.use(cors());
 app.get("/", (req, res) => res.send('Gem'))
 app.use('/api/user', userRoutes);
 app.use('/banner', express.static(path.join('asset/banner')));
-app.use('/products', express.static(path.join('asset/events')));
+app.use('/packages', express.static(path.join('asset/packages')));
 
 app.use('/api/banner', bannerRoutes);
-app.use('/api/package', packageRoutes);
+app.use('/api/packages', packageRoutes);
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));

@@ -2,7 +2,7 @@ const multer = require('multer');
 
 const diskStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'asset/products');
+    cb(null, 'asset/packages');
   },
   filename: (req, file, cb) => {
     const mimeType = file.mimetype.split('/');
@@ -13,7 +13,6 @@ const diskStorage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  console.log(file,'adsadad')
   const allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
   allowedMimeTypes.includes(file.mimetype) ? cb(null, true) : cb(null, false);
 };
