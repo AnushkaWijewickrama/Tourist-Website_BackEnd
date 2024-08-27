@@ -9,6 +9,7 @@ const userRoutes = require('./routes/user');
 
 const bannerRoutes = require('./routes/banner');
 const packageRoutes = require('./routes/package');
+const destinationRoutes = require('./routes/destination');
 
 
 const app = express();
@@ -25,13 +26,15 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(cors());
-app.get("/", (req, res) => res.send('Gem'))
+app.get("/", (req, res) => res.send('tourist'))
 app.use('/api/user', userRoutes);
 app.use('/banner', express.static(path.join('asset/banner')));
 app.use('/packages', express.static(path.join('asset/packages')));
+app.use('/destination', express.static(path.join('asset/destination')));
 
 app.use('/api/banner', bannerRoutes);
 app.use('/api/packages', packageRoutes);
+app.use('/api/destination', destinationRoutes);
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
