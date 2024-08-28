@@ -10,6 +10,7 @@ const userRoutes = require('./routes/user');
 const bannerRoutes = require('./routes/banner');
 const packageRoutes = require('./routes/package');
 const destinationRoutes = require('./routes/destination');
+const galleryRoutes = require('./routes/gallery');
 
 
 const app = express();
@@ -31,10 +32,12 @@ app.use('/api/user', userRoutes);
 app.use('/banner', express.static(path.join('asset/banner')));
 app.use('/packages', express.static(path.join('asset/packages')));
 app.use('/destination', express.static(path.join('asset/destination')));
+app.use('/gallery', express.static(path.join('asset/gallery')));
 
 app.use('/api/banner', bannerRoutes);
 app.use('/api/packages', packageRoutes);
 app.use('/api/destination', destinationRoutes);
+app.use('/api/gallery', galleryRoutes);
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
