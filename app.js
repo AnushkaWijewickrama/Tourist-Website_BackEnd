@@ -26,7 +26,13 @@ mongoose
   .catch((err) => console.log(`Could not connect to database server`, err));
 
 app.use(bodyParser.json());
-app.use(cors());
+const corsOptions = {
+  origin: 'https://tourist-website-back-end-ui.vercel.app', // Allow only your frontend origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow cookies or other credentials to be sent in the request
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+};
+app.use(cors(corsOptions));
 app.get("/", (req, res) => res.send('tourist'))
 app.use('/api/user', userRoutes);
 app.use('/banner', express.static(path.join('asset/banner')));
