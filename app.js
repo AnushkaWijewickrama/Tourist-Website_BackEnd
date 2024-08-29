@@ -20,7 +20,7 @@ mongoose
   .connect(
     "mongodb+srv://kushananushka6060:eIQlOhbW31pu93xs@cluster0.hedhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => {
-    console.log(port, 'Tourist')
+    console.log(port, 'Anushka')
     app.listen(port);
   })
   .catch((err) => console.log(`Could not connect to database server`, err));
