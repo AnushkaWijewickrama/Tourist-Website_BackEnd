@@ -33,7 +33,7 @@ const corsOptions = {
   optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 };
 app.use(cors(corsOptions));
-app.get("/", (req, res) => res.send('tourist'))
+app.get("/", (req, res) => res.send('anushka'))
 app.use('/api/user', userRoutes);
 app.use('/banner', express.static(path.join('asset/banner')));
 app.use('/packages', express.static(path.join('asset/packages')));
