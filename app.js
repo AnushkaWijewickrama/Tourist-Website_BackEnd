@@ -27,7 +27,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(cors());
-app.get("/", (req, res) => res.send('Usoft'))
+app.get("/", (req, res) => res.send('Usoft1'))
 app.use('/api/user', userRoutes);
 app.use('/banner', express.static(path.join('asset/banner')));
 app.use('/packages', express.static(path.join('asset/packages')));
