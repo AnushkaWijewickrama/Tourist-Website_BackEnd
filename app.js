@@ -26,13 +26,7 @@ mongoose
   .catch((err) => console.log(`Could not connect to database server`, err));
 
 app.use(bodyParser.json());
-const corsOptions = {
-  origin: ['https://tourist-website-back-end-ui.vercel.app', 'https://tourist-website-seven.vercel.app', 'https://project1-anushkawijewickrama-anushkawijewickramas-projects.vercel.app', 'https://main--touristwebsite123.netlify.app'], // Allow only your frontend origin
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Allow cookies or other credentials to be sent in the request
-  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
-};
-app.use(cors(corsOptions));
+app.use(cors());
 app.get("/", (req, res) => res.send('anushka'))
 app.use('/api/user', userRoutes);
 app.use('/banner', express.static(path.join('asset/banner')));
