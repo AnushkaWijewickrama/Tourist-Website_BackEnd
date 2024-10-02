@@ -24,7 +24,7 @@ exports.getProductDetailsByProductId = async (req, res) => {
 
 };
 exports.postProductDetails = async (req, res) => {
-  const { title, description, longDescription } = req.body;
+  const { title, description, longDescription, price } = req.body;
   const imageData = req?.files?.image;
   const imagePath = [];
 
@@ -71,7 +71,8 @@ exports.postProductDetails = async (req, res) => {
         title,
         description,
         longDescription,
-        imagePath
+        imagePath,
+        price
       });
 
       const createdProduct = await product.save();
@@ -103,7 +104,7 @@ exports.getProductDetailsById = async (req, res) => {
 exports.updateProductDetails = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, longDescription } = req.body;
+    const { title, description, longDescription, price } = req.body;
     // Array to hold new image URLs
     let newImages = [];
 
@@ -205,6 +206,7 @@ exports.updateProductDetails = async (req, res) => {
     if (title) updates['title'] = title;
     if (description) updates['description'] = description;
     if (longDescription) updates['longDescription'] = longDescription;
+    if (price) updates['price'] = price;
     updates['imagePath'] = finalImages;
 
     // Update product details
