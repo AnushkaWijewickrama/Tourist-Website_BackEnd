@@ -11,7 +11,8 @@ const bannerRoutes = require('./routes/banner');
 const packageRoutes = require('./routes/package');
 const destinationRoutes = require('./routes/destination');
 const galleryRoutes = require('./routes/gallery');
-
+const productRoutes = require('./routes/products');
+const productsdetailsRoutes = require('./routes/productsdetails');
 
 const app = express();
 
@@ -20,14 +21,14 @@ mongoose
   .connect(
     "mongodb+srv://kushananushka6060:eIQlOhbW31pu93xs@cluster0.hedhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => {
-    console.log(port, 'Anushka')
+    console.log(port, 'Usoft')
     app.listen(port);
   })
   .catch((err) => console.log(`Could not connect to database server`, err));
 
 app.use(bodyParser.json());
 app.use(cors());
-app.get("/", (req, res) => res.send('Usoft1'))
+app.get("/", (req, res) => res.send('Usoft'))
 app.use('/api/user', userRoutes);
 app.use('/banner', express.static(path.join('asset/banner')));
 app.use('/packages', express.static(path.join('asset/packages')));
@@ -38,6 +39,8 @@ app.use('/api/banner', bannerRoutes);
 app.use('/api/packages', packageRoutes);
 app.use('/api/destination', destinationRoutes);
 app.use('/api/gallery', galleryRoutes);
+app.use('/api/productsingle', productsdetailsRoutes);
+app.use('/api/products', productRoutes);
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
