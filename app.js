@@ -19,7 +19,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 mongoose
   .connect(
-    "mongodb+srv://kushananushka6060:eIQlOhbW31pu93xs@cluster0.hedhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    "mongodb+srv://usoft59:jvnYgObqDH5UegVt@cluster0.vfcjq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => {
     console.log(port, 'Usoft')
     app.listen(port);
