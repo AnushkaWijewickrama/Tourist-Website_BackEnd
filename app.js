@@ -13,6 +13,7 @@ const destinationRoutes = require('./routes/destination');
 const galleryRoutes = require('./routes/gallery');
 const productRoutes = require('./routes/products');
 const productsdetailsRoutes = require('./routes/productsdetails');
+const testimonialsRoutes = require('./routes/testimonial')
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use('/api/destination', destinationRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/productsingle', productsdetailsRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/testimonials', testimonialsRoutes);
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
