@@ -12,7 +12,7 @@ const bucket = storage.bucket('gs://fir-78726.appspot.com');
 
 exports.getpackages = async (req, res) => {
   try {
-    const packages = await Package.find().select('price imagePath title description latest discount');
+    const packages = await Package.find().select('imagePath title description latest packageDetails');
     res.status(200).json(packages);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
@@ -26,7 +26,7 @@ exports.getpackage = async (req, res) => {
 };
 
 exports.postpackage = async (req, res) => {
-  const { title, description, latest, price, discount } = req.body;
+  const { title, description, latest, packageDetails } = req.body;
   let imagePath = '';
 
   if (req.file) {
@@ -62,8 +62,7 @@ exports.postpackage = async (req, res) => {
           description,
           imagePath,
           latest,
-          price,
-          discount
+          packageDetails
         });
 
         const createdPackage = await package.save();
@@ -92,7 +91,7 @@ exports.deletepackageById = async (req, res) => {
 
 };
 exports.postpackageSingle = async (req, res) => {
-  const { title, description, latest, price, discount } = req.body;
+  const { title, description, latest, packageDetails } = req.body;
   let imagePath = '';
 
   if (req.file) {
@@ -128,8 +127,7 @@ exports.postpackageSingle = async (req, res) => {
           description,
           imagePath,
           latest,
-          price,
-          discount
+          packageDetails
         });
 
         const createdPackage = await package.save();
@@ -154,7 +152,7 @@ exports.postpackageSingle = async (req, res) => {
 exports.updatepackage = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, price, latest, discount } = req.body;
+    const { title, description, latest, packageDetails } = req.body;
 
     const updates = {};
 
@@ -208,9 +206,8 @@ exports.updatepackage = async (req, res) => {
       // If no new image, proceed with updating other fields
       if (title) updates['title'] = title;
       if (description) updates['description'] = description;
-      if (price) updates['price'] = price;
       if (latest) updates['latest'] = latest;
-      if (discount) updates['discount'] = discount;
+      if (packageDetails) updates['packageDetails'] = packageDetails;
 
       const updatedPackage = await Package.findByIdAndUpdate(id, updates, { new: true });
 

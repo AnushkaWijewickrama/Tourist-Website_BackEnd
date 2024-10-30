@@ -14,6 +14,7 @@ const galleryRoutes = require('./routes/gallery');
 const productRoutes = require('./routes/products');
 const productsdetailsRoutes = require('./routes/productsdetails');
 const testimonialsRoutes = require('./routes/testimonial')
+const packageDetailsRoutes = require('./routes/package-details')
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use('/api/gallery', galleryRoutes);
 app.use('/api/productsingle', productsdetailsRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
+app.use('/api/packagedetails', packageDetailsRoutes);
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
